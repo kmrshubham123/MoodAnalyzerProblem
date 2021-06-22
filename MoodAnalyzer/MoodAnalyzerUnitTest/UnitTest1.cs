@@ -9,6 +9,7 @@ namespace MoodAnalyzerUnitTest
         public void Setup()
         {
         }
+        //UC1:-Respond Happy and Sad Mood
         [Test]
         public void GivenMood_Return_Sad()
         {

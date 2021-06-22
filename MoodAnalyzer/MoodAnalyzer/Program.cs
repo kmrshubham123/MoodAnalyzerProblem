@@ -12,7 +12,6 @@ namespace MoodAnalyzer
             MoodAnalyser analysermood = new MoodAnalyser("I am in Any Mood");
             Console.WriteLine("I am in Sad Mood:- "+ analyser.AnalyseMood());
             Console.WriteLine("I am in Any Mood:- "+ analysermood.AnalyseMood());
-
         }
     }
 }
