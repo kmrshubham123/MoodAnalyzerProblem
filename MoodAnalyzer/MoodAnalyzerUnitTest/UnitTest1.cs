@@ -11,7 +11,7 @@ namespace MoodAnalyzerUnitTest
         }
         //UC1:-Respond Happy and Sad Mood
         [Test]
-        public void GivenMood_Return_Sad()
+        public void Method_Return_Sad()
         {
             //Arrange
             string expected = "Sad";
