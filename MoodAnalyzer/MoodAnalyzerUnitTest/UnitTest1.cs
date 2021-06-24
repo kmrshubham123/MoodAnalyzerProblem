@@ -9,7 +9,7 @@ namespace MoodAnalyzerUnitTest
         public void Setup()
         {
         }
-        //UC1:-Respond Happy and Sad Mood
+        //TC1.1:-Respond Happy and Sad Mood
         [Test]
         public void Method_Return_Sad()
         {
@@ -20,14 +20,25 @@ namespace MoodAnalyzerUnitTest
             //Assert
             Assert.AreEqual(expected, moodAnalyser.AnalyseMood());
         }
-
+        //TC1.2
         [Test]
         public void Method_Return_Happy() 
         {
             //Arrange
             string expected = "Happy";
             //Act
-            MoodAnalyser moodAnalyser = new MoodAnalyser("I am in Any Mood");
+            MoodAnalyser moodAnalyser = new MoodAnalyser("I am in Happy Mood");
+            //Assert
+            Assert.AreEqual(expected, moodAnalyser.AnalyseMood());
+        }
+        //TC2.1:-Null mood Should Return Happy
+        [Test]
+        public void NullMood_Return_Happy()
+        {
+            //Arrange
+            string expected = "Happy";
+            //Act
+            MoodAnalyser moodAnalyser = new MoodAnalyser(null);
             //Assert
             Assert.AreEqual(expected, moodAnalyser.AnalyseMood());
         }
