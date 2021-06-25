@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MoodAnalyzer
 {
     public class MoodAnalyser
     {
+
         public string message;
+        public MoodAnalyser()
+        {
+
+        }
         /// <summary>
         /// Parameterised Constructor.
         /// </summary>
@@ -23,20 +27,30 @@ namespace MoodAnalyzer
         /// <returns></returns>
         public string AnalyseMood()
         {
-            try // Block of Code to be tested for error while it is being executed
-            { 
-                if (this.message.Contains("Sad"))//Contains():- This method is used to check whether the substring occurs within a given string or not.
-                    return "Sad";
-                if (this.message.Contains("Happy"))
-                    return "Happy";
-                if (this.message.Contains(null))
-                    return "Happy";
-            }
-            catch // Block of code to be Executed if an error in the block
+            try // Block of Code to be tested ,for error while it is being executed
             {
-                return "Happy";
+                if (this.message.Equals(string.Empty))
+                {
+                    throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.EMPTY_MESSAGE,"Mood should not be Empty");
+                }
+                if (this.message.Contains("Sad")) //Contains():- This method is used to check whether the substring occurs within a given string or not.
+                {
+                    return "Sad";
+                }
+                else
+                {
+                    return "Happy";
+                }
             }
-            return null; // Value Return for all code path (AnalyseMood)
+            catch (NullReferenceException)// Block of code to be Executed if an error in the block
+            {
+                throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NULL_MESSAGE, "Mood should not be null");
+            }
+            catch (MoodAnalyserCustomException exception)
+            {
+                return exception.Message;
+            }
+
         }
     }
-}
+}    

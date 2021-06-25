@@ -14,7 +14,7 @@ namespace MoodAnalyzer
             Console.WriteLine("I am in Happy Mood:- "+ analysermood.AnalyseMood());
             //UC2:-
             MoodAnalyser moodAnalyser = new MoodAnalyser("");
-            Console.WriteLine("Given Null Message:- "+moodAnalyser.AnalyseMood());
+            Console.WriteLine("Given Null Message:- "+ moodAnalyser.AnalyseMood());
         }
     }
 }
