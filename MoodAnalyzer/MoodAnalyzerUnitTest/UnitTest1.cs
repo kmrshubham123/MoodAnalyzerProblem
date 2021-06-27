@@ -46,7 +46,7 @@ namespace MoodAnalyzerUnitTest
         }
         //TC3.1:-Given empty mood should Thow Mood AnalysisException Indicating Empty mood
         [Test]
-        public void Given_Empty_Mood_Should_Thow_Mood_AnalysisException_Indicating_Empty_Mood()
+        public void Given_Empty_Mood_Should_Thow_Mood_MoodAnalyserCustomException_Indicating_Empty_Mood()
         {
             try
             {
@@ -127,24 +127,24 @@ namespace MoodAnalyzerUnitTest
             //Arrange
             string className = "MoodAnalyzer.MoodAnalyser";
             string constructorName = "MoodAnalyser";
-            MoodAnalyser expectedObj = new MoodAnalyser("HAPPY");
+            MoodAnalyser expectedObj = new MoodAnalyser("Happy");
             //Act
-            object resultObj = MoodAnalyserFactory.CreateMoodAnalyserObjectUsingParametzisedConstructor(className, constructorName);
+            object resultObj = MoodAnalyserFactory.CreateMoodAnalyserObjectUsingParametzisedConstructor(className, constructorName,"HAPPY");
             //Assert
             expectedObj.Equals(resultObj);
         }
         //TC5.2:-Pass Wrong Class Name Catch exception and throw Exception indicating No such class error
         [Test]
-        public void Given_Wrong_Class_Name_Should_Throw_MoodAnalysisException_For_Parameterized_Constructor()
+        public void Given_Wrong_Class_Name_Should_Throw_MoodAnalyserCustomException_For_Parameterized_Constructor()
         {
             try
             {
                 //Arrange
                 string className = "WrongNameSpace.MoodAnalyser";
                 string constructorName = "MoodAnalyser";
-                MoodAnalyser expectedObj = new MoodAnalyser("HAPPY");
+                MoodAnalyser expectedObj = new MoodAnalyser("Happy");
                 //Act
-                object resultObj = MoodAnalyserFactory.CreateMoodAnalyserObjectUsingParametzisedConstructor(className, constructorName);
+                object resultObj = MoodAnalyserFactory.CreateMoodAnalyserObjectUsingParametzisedConstructor(className, constructorName,"HAPPY");
             }
             catch (MoodAnalyserCustomException e)
             {
@@ -154,16 +154,16 @@ namespace MoodAnalyzerUnitTest
         }
         //TC5.3:-Pass Wrong Constructor parameter, cactch the Exception and throw indicating No such method Error
         [Test]
-        public void Given_Improper_Constructor_Name_Should_Throw_MoodAnalysisException_For_Parameterized_Constructor()
+        public void Given_Improper_Constructor_Name_Should_Throw_MoodAnalyserCustomException_For_Parameterized_Constructor()
         {
             try
             {
                 //Arrange
                 string className = "MoodAnalyzer.MoodAnalyser";
                 string constructorName = "WrongConstructorName";
-                MoodAnalyser expectedObj = new MoodAnalyser("HAPPY");
+                MoodAnalyser expectedObj = new MoodAnalyser("Happy");
                 //Act
-                object resultObj = MoodAnalyserFactory.CreateMoodAnalyserObjectUsingParametzisedConstructor(className, constructorName);
+                object resultObj = MoodAnalyserFactory.CreateMoodAnalyserObjectUsingParametzisedConstructor(className, constructorName,"HAPPY");
             }
             catch (MoodAnalyserCustomException e)
             {
@@ -171,8 +171,36 @@ namespace MoodAnalyzerUnitTest
                 Assert.AreEqual("Constructor is not Found", e.Message);
             }
         }
-
-
+        //TC6.1:-Invoke Analyse Method and Show Happy Mood
+        [Test]
+        public void Given_Happy_Message_Using_Reflection_When_Proper_Should_Return_Happy()
+        {
+            //Arrange
+            string message = "Happy";
+            string methodName = "AnalyseMood";
+            //Act
+            string actual = MoodAnalyserFactory.InvokeAnalyseMood(message, methodName);
+            //Assert
+            Assert.AreEqual("Happy", actual);
+        }
+        //TC6.2:-Pass Wrong Method Should Throw MoodAnalyserCustomException
+        [Test]
+        public void Given_Improper_Method_Name_Throw_MoodAnalyserCustomException_Indicating_No_Such_Method()
+        {
+            try
+            {
+                //Arrange
+                string message = "Happy";
+                string methodName = "WrongMethodName";
+                //Act
+                string actual = MoodAnalyserFactory.InvokeAnalyseMood(message, methodName);
+            }
+            catch (MoodAnalyserCustomException e)
+            {
+                //Assert
+                Assert.AreEqual("No Such Method", e.Message);
+            }
+        }
 
     }
 }
