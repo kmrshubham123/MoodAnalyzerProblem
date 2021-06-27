@@ -15,10 +15,6 @@ namespace MoodAnalyzer
             //UC2,3:-
             MoodAnalyser moodAnalyser = new MoodAnalyser("");
             Console.WriteLine("Given Null Message:- "+ moodAnalyser.AnalyseMood());
-<<<<<<< HEAD
-           
-=======
->>>>>>> UC6-ReflectionToInvokeMethod
         }
     }
 }
