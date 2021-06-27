@@ -46,7 +46,7 @@ namespace MoodAnalyzerUnitTest
         }
         //TC3.1:-Given empty mood should Thow Mood AnalysisException Indicating Empty mood
         [Test]
-        public void Given_Empty_Mood_Should_Thow_Mood_MoodAnalyserCustomException_Indicating_Empty_Mood()
+        public void Given_Empty_Mood_Should_Thow_Mood_MoodAnalyserCustomException_Indicating_Empty_Mood() 
         {
             try
             {

@@ -16,6 +16,9 @@ namespace MoodAnalyzer
             MoodAnalyser moodAnalyser = new MoodAnalyser("");
             Console.WriteLine("Given Null Message:- "+ moodAnalyser.AnalyseMood());
             MoodAnalyserFactory.CreateMoodAnalyse("MoodAnalyzer.MoodAnalyser", "MoodAnalyser");
+
+            Console.WriteLine("Message:- " + MoodAnalyserFactory.CreateMoodAnalyse("MoodAnalyzer.MoodAnalyser", "MoodAnalyser"));
+
         }
     }
 }
