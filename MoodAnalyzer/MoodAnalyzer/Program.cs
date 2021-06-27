@@ -12,7 +12,7 @@ namespace MoodAnalyzer
             Console.WriteLine("I am in Sad Mood:- " + analyser.AnalyseMood());
             MoodAnalyser analysermood = new MoodAnalyser("I am in Happy Mood");
             Console.WriteLine("I am in Happy Mood:- "+ analysermood.AnalyseMood());
-            //UC2:-
+            //UC2,3:-
             MoodAnalyser moodAnalyser = new MoodAnalyser("");
             Console.WriteLine("Given Null Message:- "+ moodAnalyser.AnalyseMood());
         }

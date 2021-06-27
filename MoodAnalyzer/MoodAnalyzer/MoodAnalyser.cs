@@ -7,6 +7,9 @@ namespace MoodAnalyzer
     {
 
         public string message;
+        /// <summary>
+        /// Unparametrized Constructor
+        /// </summary>
         public MoodAnalyser()
         {
 
@@ -29,6 +32,7 @@ namespace MoodAnalyzer
         {
             try // Block of Code to be tested ,for error while it is being executed
             {
+                
                 if (this.message.Equals(string.Empty))
                 {
                     throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.EMPTY_MESSAGE,"Mood should not be Empty");

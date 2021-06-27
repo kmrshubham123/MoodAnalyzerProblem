@@ -70,5 +70,53 @@ namespace MoodAnalyzerUnitTest
             //Assert
             Assert.AreEqual(expected, actual);
         }
+        [Test]
+        //TC4.1:-Given MoodAnalyser Class Name Should Return Mood Anlayser Object
+        public void GivenMoodAnalyserClassName_WhenAnalyse_ShouldReturnObject()
+        {
+            //Arrange
+            string message = null;
+            //Act
+            object expected = new MoodAnalyser(message);
+            object resultobj = MoodAnalyserFactory.CreateMoodAnalyse("MoodAnalyzer.MoodAnalyser", "MoodAnalyser");
+            //Assert
+            expected.Equals(resultobj);
+        }
+        [Test]
+        //TC4.2:-Given class Name when improper should throw MoodAnalyserCustomException
+        public void Given_Improper_Class_Name_Should_Throw_MoodAnalyserCustomException_Indicating_No_Such_Class()
+        {
+            try
+            {
+                //Arrange
+                string className = "WrongNamespace.MoodAnalyser";
+                string constructorName = "MoodAnalyser";
+                //Act
+                object resultObj = MoodAnalyserFactory.CreateMoodAnalyse(className, constructorName);
+            }
+            catch (MoodAnalyserCustomException e)
+            {
+                //Assert
+                Assert.AreEqual("Class Not Found", e.Message);
+            }
+        }
+        [Test]
+        //TC4.3:-Given class when constructor improper should throw MoodAnalysisException
+        public void Given_Improper_Constructor_Name_Should_Throw_MoodAnalyserCustomException_Indicating_No_Such_Constuctor()
+        {
+            try
+            {
+                //Arrange
+                string className = "MoodAnalyzer.MoodAnalyser";
+                string constructorName = "WrongConstructorName";
+                //Act
+                object resultObj = MoodAnalyserFactory.CreateMoodAnalyse(className, constructorName);
+            }
+            catch (MoodAnalyserCustomException e)
+            {
+                //Assert
+                Assert.AreEqual("Constructor is not Found", e.Message);
+            }
+        }
     }
 }
