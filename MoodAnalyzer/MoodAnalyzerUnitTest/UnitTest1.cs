@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using MoodAnalyzer;
 
+
 namespace MoodAnalyzerUnitTest
 {
     public class Tests
@@ -36,7 +37,7 @@ namespace MoodAnalyzerUnitTest
         public void NullMood_Return_Happy()
         {
             //Arrange
-            string expected ="Mood should not be Empty";
+            string expected = "Mood should not be Empty";
             //Act
             MoodAnalyser moodAnalyser = new MoodAnalyser("");
             string actual = moodAnalyser.AnalyseMood();
@@ -53,7 +54,7 @@ namespace MoodAnalyzerUnitTest
                 MoodAnalyser moodAnalyser = new MoodAnalyser(message);
                 string mood = moodAnalyser.AnalyseMood();
             }
-            catch(MoodAnalyserCustomException e)
+            catch (MoodAnalyserCustomException e)
             {
                 Assert.AreEqual("Mood Should not be Empty", e.Message);
             }
@@ -118,5 +119,60 @@ namespace MoodAnalyzerUnitTest
                 Assert.AreEqual("Constructor is not Found", e.Message);
             }
         }
+        //TC5.1:-Given MoodAnlayser when proper return MoodAnalyser Object
+        [Test]
+        public void Given_MoodAnalyser_Class_Name_Should_Return_MoodAnalyser_Object_Using_Parametrized_Constructor()
+        {
+
+            //Arrange
+            string className = "MoodAnalyzer.MoodAnalyser";
+            string constructorName = "MoodAnalyser";
+            MoodAnalyser expectedObj = new MoodAnalyser("HAPPY");
+            //Act
+            object resultObj = MoodAnalyserFactory.CreateMoodAnalyserObjectUsingParametzisedConstructor(className, constructorName);
+            //Assert
+            expectedObj.Equals(resultObj);
+        }
+        //TC5.2:-Pass Wrong Class Name Catch exception and throw Exception indicating No such class error
+        [Test]
+        public void Given_Wrong_Class_Name_Should_Throw_MoodAnalysisException_For_Parameterized_Constructor()
+        {
+            try
+            {
+                //Arrange
+                string className = "WrongNameSpace.MoodAnalyser";
+                string constructorName = "MoodAnalyser";
+                MoodAnalyser expectedObj = new MoodAnalyser("HAPPY");
+                //Act
+                object resultObj = MoodAnalyserFactory.CreateMoodAnalyserObjectUsingParametzisedConstructor(className, constructorName);
+            }
+            catch (MoodAnalyserCustomException e)
+            {
+                //Assert
+                Assert.AreEqual("Class Not Found", e.Message);
+            }
+        }
+        //TC5.3:-Pass Wrong Constructor parameter, cactch the Exception and throw indicating No such method Error
+        [Test]
+        public void Given_Improper_Constructor_Name_Should_Throw_MoodAnalysisException_For_Parameterized_Constructor()
+        {
+            try
+            {
+                //Arrange
+                string className = "MoodAnalyzer.MoodAnalyser";
+                string constructorName = "WrongConstructorName";
+                MoodAnalyser expectedObj = new MoodAnalyser("HAPPY");
+                //Act
+                object resultObj = MoodAnalyserFactory.CreateMoodAnalyserObjectUsingParametzisedConstructor(className, constructorName);
+            }
+            catch (MoodAnalyserCustomException e)
+            {
+                //Assert
+                Assert.AreEqual("Constructor is not Found", e.Message);
+            }
+        }
+
+
+
     }
 }
