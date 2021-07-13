@@ -50,13 +50,13 @@ namespace MoodAnalyzerUnitTest
         {
             try
             {
-                string message = "";
+                string message = null;
                 MoodAnalyser moodAnalyser = new MoodAnalyser(message);
                 string mood = moodAnalyser.AnalyseMood();
             }
             catch (MoodAnalyserCustomException e)
             {
-                Assert.AreEqual("Mood Should not be Empty", e.Message);
+                Assert.AreEqual("Mood should not be null", e.Message);
             }
         }
         [Test]
@@ -199,6 +199,54 @@ namespace MoodAnalyzerUnitTest
             {
                 //Assert
                 Assert.AreEqual("No Such Method", e.Message);
+            }
+        }
+        //TC7.1:-Set Happy Message With Reflector Should Return Happy
+        [Test]
+        public void Given_Happy_Message_With_Reflection_Should_Return_Happy()
+        {
+            //Arrange
+            string message = "HAPPY";
+            string fieldName = "message";
+            //Act
+            string actual = MoodAnalyserFactory.SetField(message, fieldName);
+            //Assert
+            Assert.AreEqual("HAPPY", actual);
+        }
+        //TC7.2:-Set Field When ImproperShould Throw Exception with No such Field
+        [Test]
+        public void Given_Improper_Field_Name_Should_Throw_MoodAnalysisException_Indicating_No_Such_Field()
+        {
+            try
+            {
+                //Arrange
+                string message = "HAPPY";
+                string fieldName = "wrongName";
+                //Act
+                string actual = MoodAnalyserFactory.SetField(message, fieldName);
+            }
+            catch (MoodAnalyserCustomException e)
+            {
+                //Assert
+                Assert.AreEqual("No such field found.", e.Message);
+            }
+        }
+        //TC7.3:-Setting Null Message with Reflector Should Throw Exception
+        [Test]
+        public void Given_Null_Message_Should_Throw_MoodAnalysisException_Indicating_Null_Message()
+        {
+            try
+            {
+                //Arrange
+                string message = null;
+                string fieldName = "message";
+                //Act
+                string actual = MoodAnalyserFactory.SetField(message, fieldName);
+            }
+            catch (MoodAnalyserCustomException e)
+            {
+                //Assert
+                Assert.AreEqual("Message should not be null.", e.Message);
             }
         }
 
